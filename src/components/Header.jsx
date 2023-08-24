@@ -1,4 +1,7 @@
-function Header() {
+import { useContext } from "react";
+
+function Header({onClickCart}) {
+
     return (
         <header>
             <div className="headerLeft">
@@ -9,7 +12,7 @@ function Header() {
             </div>
             </div>
             <ul className="headerRight">
-            <li>
+            <li onClick={onClickCart}>
                 <img src="/img/cart.svg" /><span>1205 руб.</span>
             </li>
             <li>

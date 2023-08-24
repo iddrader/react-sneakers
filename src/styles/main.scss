@@ -1,11 +1,11 @@
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     background-color: #e7f6ff;
 }
 
 * {
+    box-sizing: border-box;
     font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -19,14 +19,16 @@ body {
 
 .drawer {
     background-color: #FFF;
-    position: absolute;
+    position: fixed;
     width: 420px;
     height: 100%;
     right: 0;
+    bottom: 0;
     box-shadow: -10px 4px 24px rgba(0,0,0,0.1);
     padding: 30px;
     display: flex;
     flex-direction: column;
+    animation: showCart 0.3s;
     
     h2 {
         display: flex;
@@ -121,37 +123,46 @@ body {
             }
         }
     }
+
+    @keyframes showCart {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
 }
 
 .greenButton {
     width: 100%;
-        height: 55px;
-        background-color: #9dd558;
-        border-radius: 18px;
-        border: none;
-        color: white;
-        font-size: 16px;
-        font-weight: 500;
-        transition: background 0.2s ease-in-out;
-        cursor: pointer;
+    height: 55px;
+    background-color: #9dd558;
+    border-radius: 18px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.2s ease-in-out;
+    cursor: pointer;
 
-        &:hover {
-            background: lighten(#9dd558, 5%);
-        }
+    &:hover {
+        background: lighten(#9dd558, 5%);
+    }
 
-        &:active {
-            background: darken(#9dd558, 5%);
-        }
+    &:active {
+        background: darken(#9dd558, 5%);
+    }
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 header {
@@ -182,6 +193,7 @@ header {
     .headerRight {
         display: flex;
         list-style-type: none;
+        cursor: pointer;
 
         li {
             margin-right: 20px;
@@ -229,7 +241,5 @@ header {
     .sneakers {
         display: flex;
         flex-wrap: wrap;
-
-        
     }
 }

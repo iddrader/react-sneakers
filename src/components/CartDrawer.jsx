@@ -1,33 +1,21 @@
-function CartDrawer() {
+function CartDrawer({onClose, cart = []}) {
+
     return (
         <div className="overlay">
             <div className="drawer">
-            <h2>Корзина<img src="/img/button-remove.svg" alt="" /></h2>
+            <h2>Корзина<img src="/img/button-remove.svg" alt="" onClick={onClose} /></h2>
             <div className="items">
-                <div className="cartItem">
-                    <div style={{ backgroundImage: 'url(/img/sneakers/1.jpg)'}} className="image"></div>            
-                    <div className="info">
-                        <p>Мужские Кроссовки Nike Air Max 270 </p>
-                        <b>12 999 руб.</b>
-                    </div>
-                    <img className="removeBtn" src="/img/button-remove.svg" alt="" />
-                </div>
-                <div className="cartItem">
-                    <div style={{ backgroundImage: 'url(/img/sneakers/2.jpg)'}} className="image"></div>
-                    <div className="info">
-                        <p>Мужские Кроссовки Nike Air Max 270 </p>
-                        <b>12 999 руб.</b>
-                    </div>
-                    <img className="removeBtn" src="/img/button-remove.svg" alt="" />
-                </div>
-                <div className="cartItem">
-                    <div style={{ backgroundImage: 'url(/img/sneakers/3.jpg)'}} className="image"></div>            
-                    <div className="info">
-                        <p>Мужские Кроссовки Nike Air Max 270 </p>
-                        <b>12 999 руб.</b>
-                    </div>
-                    <img className="removeBtn" src="/img/button-remove.svg" alt="" />
-                </div>
+                {cart.map( (element, index) => (
+                    <div key={index} className="cartItem">
+                        <div style={{ backgroundImage: `url(${element.imageURL}`}} className="image"></div>            
+                        <div className="info">
+                            <p>{element.title}</p>
+                            <b>{element.price} руб.</b>
+                        </div>
+                        <img className="removeBtn" src="/img/button-remove.svg" alt="" />
+                    </div>)
+                )}
+                
             </div>
             <div className="cartTotalBlock">
                 <ul>
