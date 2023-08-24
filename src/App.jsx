@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import Card from "./components/Card.jsx";
+import Card from "./components/Card";
 import Header from "./components/Header.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 
