@@ -1,21 +1,26 @@
 import { useState } from 'react';
 import styles from './Card.module.scss';
 
-function Card({title, price, imageURL, onFavourite, onAddToCart}) {
+function Card({title, price, imageURL, onAddToCart}) {
   const [isChecked, setIsChecked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   
   const onClickPlus = () => {
     onAddToCart({title, price, imageURL});
-    setIsChecked(isChecked => !isChecked)
+    setIsChecked(isChecked => !isChecked);
+  }
+
+  const onClickLiked = () => {
+    setIsLiked(isLiked => !isLiked);
   }
 
   return (
       <div className={styles.card}>
         <div className={styles.favourite}>
           <img 
-            src="/img/heart-unliked.svg" 
+             src={isLiked ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}  
             alt="" 
-            onClick={onFavourite}
+            onClick={onClickLiked}
           />
         </div>
         <img width={133} height={112} src={imageURL} alt="" />

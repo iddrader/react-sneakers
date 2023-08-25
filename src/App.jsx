@@ -13,12 +13,20 @@ function App() {
 
   useEffect(() => {
     axios.get("https://64e741bab0fd9648b78fa282.mockapi.io/items")
-      .then(response => response.data)
-      .then(data => setItems(data))
+      .then(response => setItems(response.data))
+    axios.get('https://64e741bab0fd9648b78fa282.mockapi.io/cart')
+      .then(response => setCart(response.data))
   }, [])
 
   const onAddToCart = (newItem) => {
+    axios.post("https://64e741bab0fd9648b78fa282.mockapi.io/cart", newItem)
     setCart(cart => [...cart, newItem])
+    console.log(cart)
+  }
+
+  const onRemoveCart = (id) => {
+    axios.delete(`https://64e741bab0fd9648b78fa282.mockapi.io/cart/${id}`);
+    setCart((prev) => prev.filter(item => item.id !== id))
   }
 
   const onSearchChange = (event) => {
@@ -31,6 +39,8 @@ function App() {
         <CartDrawer 
           onClose={() => setShowCart(false)} 
           cart={cart}
+          setCart={setCart}
+          onRemove={onRemoveCart}
         /> 
       }
       <Header onClickCart={() => setShowCart(true)} />
@@ -40,19 +50,20 @@ function App() {
           <div className="searchBlock">
             <img src="/img/search.svg" alt="" />
             <input type="text" placeholder="Поиск..." value={searchValue} onChange={onSearchChange}/>
-            <img src="/img/button-remove.svg" alt="" />
+            { searchValue && <img src="/img/button-remove.svg" alt="" onClick={() => setSearchValue("")}/>}
           </div>
         </div>
         <div className="sneakers">
-          { items && items.map( (element, index) => 
-            <Card 
-              title={element.title} 
-              price={element.price} 
-              imageURL={element.imageURL} 
-              onFavourite={() => console.log(element)}
-              onAddToCart={onAddToCart}
-              key={index} 
-            />
+          { items && items
+                      .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+                      .map( (element, index) => 
+                        <Card 
+                          title={element.title} 
+                          price={element.price} 
+                          imageURL={element.imageURL} 
+                          onAddToCart={onAddToCart}
+                          key={index} 
+                        />
           )}
         </div>
       </div>

@@ -41,6 +41,42 @@ body {
         }
     }
 
+    .cartEmpty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex: auto;
+        
+        img {
+            margin-bottom: 20px;
+        }
+
+        p {
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .arrowBack {
+                transform: rotate(180deg);
+                margin-top: 20px;
+                margin-right: 10px;
+                transition: transform 0.2s ease-in-out;
+            }
+
+            &:hover {
+                .arrowBack {
+                    transform: translateX(-5px) rotate(180deg);
+                }
+            }
+        }
+
+    }
+
 
     .cartTotalBlock {
         ul {
@@ -227,13 +263,14 @@ header {
             border-radius: 10px;
             display: flex;
             align-items: center;
+            width: 300px;
 
             input {
                 border: none;
                 margin-left: 4px;
                 font-size: 16px;
                 padding: 13px;
-                width: 200px;
+                max-width: 220px;
             }
         }
     }
